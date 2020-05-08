@@ -50,10 +50,30 @@ p.titletext {font-size:2em;}
 	width: 600px;
 	border: solid 5px #A1C349;
 	border-radius: 5px;
-
 	
 }
 
+#controls {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+#restart {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	width: 200px;
+	height: 80px;
+	background-color: #243010;
+	border: solid 10px #A1C349;
+	border-radius: 5px;
+	font-size: 1.2em;
+	color: #A1C349;
+	outline: none;
+}
 
  /* Light Box CSS */
 
@@ -63,6 +83,14 @@ p.titletext {font-size:2em;}
 
 .unhidden {
 	display: block;
+}
+
+#blocker {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
 }
 
 #lightbox	{
