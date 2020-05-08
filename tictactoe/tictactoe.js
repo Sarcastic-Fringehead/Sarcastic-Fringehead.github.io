@@ -1,21 +1,78 @@
 let currentPlayer = "X";
 let gameStatus = ""; // "" = continue, "Tie", "X Wins", "O Wins"
 let turns = 0;
+let idNames = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+
+//resets board and all variables
+function newGame() {
+
+	//resets board
+	for (var i = 0; i < idNames.length; i++) {
+		document.getElementById(idNames[i]).innerHTML = "";
+	}//for
+	
+	//resets variables
+	turns = 0;
+	currentPlayer = "X";
+	gameStatus = "";
+
+	//hides restart button and removes blocker
+	changeVis("controls");
+	changeVis("blocker");
+
+}//newGame
+
+//randomly chooses a free box for computer
+function computerTakeTurn() {
+
+	let idName = "";
+
+	//choose random boxes til an empty one is found
+	do{
+		let rand = (parseInt(Math.random()*9)); // 1-9
+		idName =  idNames[rand];
+
+		//check if chosen box is empty
+		if(document.getElementById(idName).innerHTML == "") {
+			document.getElementById(idName).innerHTML = currentPlayer;
+			break;
+		}//if
+	} while(true);
+
+}//computerTakeTurn
+
 
 // take player turn
 function playerTurn(e) {
 
+	//fills out square or tells player that square is taken
 	if(e.innerHTML == "") {
-	e.innerHTML = currentPlayer;
-	checkGameStatus();
+		e.innerHTML = currentPlayer;
+		changeVis("blocker");
+		checkGameStatus();
+
 	} else {
 		showLightBox("This box has already been selected!", "No cheating!");
 		return;
 	}// else
 
+	// if game is not over, computer goes
+	if (gameStatus == "") {
+
+		setTimeout(function() {
+			changeVis("blocker");
+			computerTakeTurn();
+			checkGameStatus();
+		}, 500
+		);
+	}//if
+
 	//game is over
 	if (gameStatus != ""){
-		showLightBox(gameStatus, "GAME OVER!");
+		setTimeout(function() {
+			showLightBox(gameStatus, "GAME OVER!");
+		}, 500
+		);
 	}//if
 
 } // playerTurn
@@ -123,5 +180,8 @@ function continueGame() {
 	changeVis("boundaryMessage");
 
 	//if the game is over, show controls
+	if (gameStatus != "") {
+		changeVis("controls");
+	}//if
 
 }//continueGame
