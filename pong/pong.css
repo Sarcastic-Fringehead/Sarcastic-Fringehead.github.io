@@ -37,19 +37,14 @@
 	margin: 0px;	
 	padding-top: 40vh;
 	font-family: 'Press Start 2P';
-}
-
-.off { 
-	transition: color 1s, font-size 1s;
 	color: black;
-	font-size: 3em;
-
+	animation-name: pulse;
+	animation-duration: 1s
 }
 
-.on {
-	color: white;
-	font-size: 5em;
-
+@keyframes pulse {
+  from {color: white; font-size: 5em;}
+  to {color: black; font-size: 3em;}
 }
 
 .paddle {
