@@ -184,8 +184,7 @@ document.getElementById("ball").style.left = leftPositionOfBall + "px";
 //adds to the combo and temporary shows combo
 function combo() {
 	document.getElementById("combo").innerHTML++;//increases combo
-	document.getElementById("combo").className = "on";
-	document.getElementById("combo").className = "off";
+	//run pulse animation
 	
 
 
