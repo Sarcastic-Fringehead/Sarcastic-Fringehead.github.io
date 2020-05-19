@@ -1,9 +1,48 @@
 #gameBoard {
-	width: 100%;
+	width: 99%;
 	height: 85vh;
 	background-color: black;
-	position: relative;
+	position: fixed;
+}
 
+#fog {
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	transition: background-color 3s;
+
+}
+
+.hidden {
+	background-color: transparent;
+}
+
+.unhidden {
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+.maybe{
+}
+
+.yes {
+	animation-name: colorOne;
+	animation-duration: 1s
+}
+
+.no {
+	animation-name: colorTwo;
+	animation-duration: 1s
+}
+
+@keyframes colorOne {
+  from {background-color: white;}
+  to {}
+}
+
+@keyframes colorTwo {
+  from {background-color: white;}
+  to {}
 }
 
 #header {
@@ -33,24 +72,42 @@
 }
 
 #combo {
+	position: relative;
+	line-height: 85vh;
+	width: 100%;
 	text-align: center;
 	margin: 0px;	
-	padding-top: 40vh;
 	font-family: 'Press Start 2P';
-	color: black;
-	animation-name: pulse;
+	font-size: 3vw;
+	color: transparent;
+	background-color: transparent;
+}
+
+.on {
+	animation-name: pulseOne;
 	animation-duration: 1s
 }
 
-@keyframes pulse {
-  from {color: white; font-size: 5em;}
-  to {color: black; font-size: 3em;}
+.off {
+	animation-name: pulseTwo;
+	animation-duration: 1s
+}
+
+@keyframes pulseOne {
+  from {color: white; font-size: 5vw;}
+  to {}
+}
+
+@keyframes pulseTwo {
+  from {color: white; font-size: 5vw;}
+  to {}
 }
 
 .paddle {
 	width: 20px;
 	height: 150px;
 	background-color: white;
+	transition: height 0.5s;
 }
 
 #paddle1 {
@@ -69,8 +126,65 @@
 	position: absolute;
 	left: 50vw;
 	top: 40vh;
+	transition: width 0.5s, height 0.5s;
 	width: 20px;
 	height: 20px;
-	background-color: white;
 	border-radius: 0px;
+}
+
+.normal {
+	transition: background-color 1s;
+	background-color: white;
+}
+
+.ghost {
+	animation-name: ghost;
+	background-color: white;
+	animation-duration: 2s;
+	animation-direction: alternate;
+	animation-iteration-count: infinite;
+}
+
+@keyframes ghost {
+	from {}
+	to{background-color: transparent;}
+}
+
+.rainbow {
+	background-color: red;
+	animation-name: rainbow;
+	animation-duration: 5s;
+	animation-direction: normal;
+	animation-iteration-count: infinite;
+}
+
+@keyframes rainbow {
+	12.5% {background-color: red;}
+	25% {background-color: orange;}
+	37.5% {background-color: yellow;}
+	50% {background-color: green;}
+	62.5% {background-color: blue;}
+	75% {background-color: indigo;}
+	87.5% {background-color: violet;}
+	100% {background-color: red;}
+}
+
+
+.shake {
+	animation: shake 1s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(0px, -2px) rotate(-1deg); }
+  20% { transform: translate(0px, 0px) rotate(1deg); }
+  30% { transform: translate(0px, 2px) rotate(0deg); }
+  40% { transform: translate(0px, -1px) rotate(1deg); }
+  50% { transform: translate(0px, 2px) rotate(-1deg); }
+  60% { transform: translate(0px, 1px) rotate(0deg); }
+  70% { transform: translate(0px, 1px) rotate(-1deg); }
+  80% { transform: translate(0px, -1px) rotate(1deg); }
+  90% { transform: translate(0px, 2px) rotate(0deg); }
+  100% { transform: translate(0px, -2px) rotate(-1deg); }
 }
