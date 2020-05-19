@@ -11,29 +11,34 @@
 
   </head>
   
-  <body>
+  <body id="body" class="still">
     <div id="header">
 
       <h1 id="title">PONG</h1>
-      <h2 id="left">P1: <span id="score1">0</span></h2>
-      <h2 id="right">P2: <span id="score2">0</span></h2>
+      <h2 id="left" class="still" >P1: <span id="score1">0</span></h2>
+      <h2 id="right" class="still">P2: <span id="score2">0</span></h2>
     </div>
 
-    <div id="gameBoard">
-
+    <div id="gameBoard" class="maybe">
+	  
+	  <p id="combo" class="on">Start!</p>
+      
       <div id="paddle1" class="paddle">
       </div>
 
-      <div id="ball">
+      <div id="ball" class="normal">
       </div>
 
       <div id="paddle2" class="paddle">
       </div>
 
-      <p id="combo">0</p>
+    <div id="fog" class="hidden"></div>
 
     </div>
 
+    <div id="background"></div>
+
+   
 
 
     <!-- include an external JavaScript file -->
