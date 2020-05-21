@@ -5,46 +5,6 @@
 	position: fixed;
 }
 
-#fog {
-	position: fixed;
-	top: 0px;
-	width: 100%;
-	height: 100%;
-	transition: background-color 3s;
-
-}
-
-.hidden {
-	background-color: transparent;
-}
-
-.unhidden {
-	background-color: rgba(255, 255, 255, 0.8);
-}
-
-.maybe{
-}
-
-.yes {
-	animation-name: colorOne;
-	animation-duration: 1s
-}
-
-.no {
-	animation-name: colorTwo;
-	animation-duration: 1s
-}
-
-@keyframes colorOne {
-  from {background-color: white;}
-  to {}
-}
-
-@keyframes colorTwo {
-  from {background-color: white;}
-  to {}
-}
-
 #header {
 	width: 100%;
 	height: 10vh;
@@ -60,7 +20,6 @@
 #header h2{
 	position: absolute;
 	bottom: 0px;
-	margin-bottom: 5px;
 }
 
 #header #left {
@@ -78,36 +37,9 @@
 	text-align: center;
 	margin: 0px;	
 	font-family: 'Press Start 2P';
-	font-size: 3vw;
+	font-size: 4vw;
 	color: transparent;
 	background-color: transparent;
-}
-
-.on {
-	animation-name: pulseOne;
-	animation-duration: 1s
-}
-
-.off {
-	animation-name: pulseTwo;
-	animation-duration: 1s
-}
-
-@keyframes pulseOne {
-  from {color: white; font-size: 5vw;}
-  to {}
-}
-
-@keyframes pulseTwo {
-  from {color: white; font-size: 5vw;}
-  to {}
-}
-
-.paddle {
-	width: 20px;
-	height: 150px;
-	background-color: white;
-	transition: height 0.5s;
 }
 
 #paddle1 {
@@ -122,6 +54,13 @@
 	bottom: 40vh;
 }
 
+.paddle {
+	width: 20px;
+	height: 150px;
+	background-color: white;
+	transition: height 0.5s;
+}
+
 #ball {
 	position: absolute;
 	left: 50vw;
@@ -132,8 +71,49 @@
 	border-radius: 0px;
 }
 
+/* From here on it's just Special effects */
+
+#fog {
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	transition: background-color 3s;
+}
+
+.hidden {
+	background-color: transparent;
+}
+
+.unhidden {
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+.maybe{
+}
+
+.yes {
+	animation-name: colorOne;
+	animation-duration: 2s
+}
+
+.no {
+	animation-name: colorTwo;
+	animation-duration: 2s
+}
+
+.on {
+	animation-name: pulseOne;
+	animation-duration: 2s
+}
+
+.off {
+	animation-name: pulseTwo;
+	animation-duration: 2s
+}
+
 .normal {
-	transition: background-color 1s;
+	transition: background-color 2s;
 	background-color: white;
 }
 
@@ -145,17 +125,42 @@
 	animation-iteration-count: infinite;
 }
 
+.rainbow {
+	background-color: red;
+	animation-name: rainbow;
+	animation-duration: 10s;
+	animation-direction: normal;
+	animation-iteration-count: infinite;
+}
+
+.shake {
+	animation: shake 2s;
+	animation-iteration-count: infinite;
+}
+
 @keyframes ghost {
 	from {}
 	to{background-color: transparent;}
 }
 
-.rainbow {
-	background-color: red;
-	animation-name: rainbow;
-	animation-duration: 5s;
-	animation-direction: normal;
-	animation-iteration-count: infinite;
+@keyframes pulseOne {
+  from {color: white;}
+  to {}
+}
+
+@keyframes pulseTwo {
+  from {color: white;}
+  to {}
+}
+
+@keyframes colorOne {
+  from {background-color: white;}
+  to {}
+}
+
+@keyframes colorTwo {
+  from {background-color: white;}
+  to {}
 }
 
 @keyframes rainbow {
@@ -169,12 +174,7 @@
 	100% {background-color: red;}
 }
 
-
-.shake {
-	animation: shake 1s;
-	animation-iteration-count: infinite;
-}
-
+/*https://www.w3schools.com/howto/howto_css_shake_image.asp*/
 @keyframes shake {
   0% { transform: translate(1px, 1px) rotate(0deg); }
   10% { transform: translate(0px, -2px) rotate(-1deg); }
