@@ -39,14 +39,30 @@ const up = 38; //ASCII for up key
 const down = 40; //ASCII for down key
 
 
+//https://www.w3schools.com/graphics/game_sound.asp
+//music created with GarageBand
+
+var lose = new sound("Loss.m4a");
+var beep = new sound("Beep.m4a");
+var boop = new sound("Boop.m4a");
+var music = new sound("Pong Song.m4a");
+var change = new sound("change.m4a");
+
+
+
+
 //starts ball and resets background colour when window loads
 window.addEventListener('load', function() {
 	document.getElementById("gameBoard").style.backgroundColor = "black";
 	startBall();
+	startMusic();
 } );
 
 //move paddles
 document.addEventListener('keydown', function(e) {
+	
+	startMusic();
+
 	if (e.keyCode == w || e.which == w){ //w
 		speedOfPaddle1 = 10 * reverse * speed;
 	}//if
@@ -86,8 +102,24 @@ document.addEventListener('keyup', function(e) {
 
 }) ;//stop paddles
 
-//resets speed, position and acceleration of ball
+//object constructor to play sounds
+//https://www.w3schools.com/graphics/game_sound.asp
+function sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function(){
+    this.sound.play();
+  }
+  this.stop = function(){
+    this.sound.pause();
+  }
+}//sound
 
+//resets speed, position and acceleration of ball
 function startBall() {
 
 	gravity = 0;
@@ -121,6 +153,8 @@ function startBall() {
 
 //updates locations of paddles and ball
 window.setInterval (function show() {
+
+	startMusic();
 
 	positionOfPaddle1 += speedOfPaddle1;
 	positionOfPaddle2 += speedOfPaddle2;
@@ -163,7 +197,8 @@ window.setInterval (function show() {
 		
 		// if ball hits right paddle, change direction and increase combo
 		if (topPositionOfBall > positionOfPaddle1 && topPositionOfBall < positionOfPaddle1 + paddleHeight){
-			
+
+
 			leftSpeedOfBall *= -1;
 			topSpeedOfBall += (speedOfPaddle1 / 10); //gives some of the paddles' vertical movement to the ball
 			addToCombo();
@@ -176,7 +211,17 @@ window.setInterval (function show() {
 				title();
 			}//if
 
+			//plays either beep or boop depending on how many times the ball has bounced
+			if(comboNum % 4 != 0){
+				if (comboNum % 2 == 0){
+					beep.play();
+				} else {
+					boop.play();
+				}//if
+			}//if
+
 		} else {
+			lose.play();
 			score2 += comboNum + 1;
 			addToScore("score2", "right", score2);
 			resetCombo("2");
@@ -195,7 +240,7 @@ window.setInterval (function show() {
 		
 		// if ball hits right paddle, change direction and increase combo
 		if (topPositionOfBall > positionOfPaddle2 && topPositionOfBall < positionOfPaddle2 + paddleHeight){
-			
+
 			leftSpeedOfBall *= -1;
 			topSpeedOfBall += (speedOfPaddle2 / 10); //gives some of the paddles' vertical movement to the ball
 			addToCombo();
@@ -208,8 +253,17 @@ window.setInterval (function show() {
 				title();
 			}//if
 
+			//plays either beep or boop depending on how many times the ball has bounced
+			if(comboNum % 2 ==0){
+				beep.play();
+			} else {
+				boop.play();
+			}//if
+
 
 		} else {
+
+			lose.play();
 			score1 += comboNum + 1;
 			addToScore("score1", "left", score1);
 			resetCombo("1");
@@ -272,6 +326,8 @@ function resetCombo(p) {
 
 //triggers a random change to the game!
 function changeItUp() {
+
+	change.play();
 	
 	colourChange();
 
@@ -458,6 +514,7 @@ function changeItUp() {
 			}
 		case 26:
 			if (document.getElementById("body").className == "still") {
+				document.getElementById("fog").className == "hidden";
 				document.getElementById("body").className = "shake";
 				document.getElementById("combo").innerHTML = "Sh-sh-shake it up!";
 				break;
@@ -587,3 +644,11 @@ function addToScore(player, position, points) {
 function title() {
 	document.getElementById("title").innerHTML = "BONKERS PONG";
 }//title
+
+
+//plays background music if it's not already playing
+function startMusic() {
+	if (music.play() == false){
+		music.play();
+	}//if
+}//music
