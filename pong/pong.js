@@ -505,6 +505,7 @@ function changeItUp() {
 		case 25:
 			if (document.getElementById("fog").className == "hidden") {
 				document.getElementById("fog").className = "unhidden";
+				document.getElementById("body").className = "still";
 				document.getElementById("combo").innerHTML = "I can't see!";
 				break;
 			} else {
