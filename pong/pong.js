@@ -1,11 +1,14 @@
 
 //global variables
 
+
 var speedOfPaddle1 = 0;
 var positionOfPaddle1 = document.getElementById("paddle1").offsetTop;
+const startPositionOfPaddle1 = document.getElementById("paddle1").offsetTop;
 
 var speedOfPaddle2 = 0;
 var positionOfPaddle2 = document.getElementById("paddle2").offsetTop;
+const startPositionOfPaddle2 = document.getElementById("paddle2").offsetTop;
 
 var paddleHeight = document.getElementById("paddle1").offsetHeight;
 const paddleWidth = document.getElementById("paddle1").offsetWidth;
@@ -30,8 +33,10 @@ var gravity = 0; // horizontal acceleration
 var speed = 1; // a togglable speed multiplier
 var acc = 0; //horizontal acceleration
 
-var score1 = 0;//player 1's score
-var score2 = 0;//player 2's score
+const MaxHP = 50; //Intial health points
+
+var HP1;//player 1's Health Points
+var HP2;//player 2's Health Points
 
 const w = 83; //ASCII for w key
 const s = 87; //ASCII for s key
@@ -48,20 +53,21 @@ var boop = new sound("Boop.m4a");
 var music = new sound("Pong Song.m4a");
 var change = new sound("change.m4a");
 
+//used to control game start/stop
+var controlPlay;
+
 
 
 
 //starts ball and resets background colour when window loads
-window.addEventListener('load', function() {
+/*window.addEventListener('load', function() {
 	document.getElementById("gameBoard").style.backgroundColor = "black";
 	startBall();
 	startMusic();
-} );
+} );*/
 
 //move paddles
 document.addEventListener('keydown', function(e) {
-	
-	startMusic();
 
 	if (e.keyCode == w || e.which == w){ //w
 		speedOfPaddle1 = 10 * reverse * speed;
@@ -152,7 +158,7 @@ function startBall() {
 
 
 //updates locations of paddles and ball
-window.setInterval (function show() {
+function show() {
 
 	startMusic();
 
@@ -195,7 +201,7 @@ window.setInterval (function show() {
 
 	if (leftPositionOfBall <= paddleWidth + 5) {
 		
-		// if ball hits right paddle, change direction and increase combo
+		// if ball hits left paddle, change direction and increase combo
 		if (topPositionOfBall > positionOfPaddle1 && topPositionOfBall < positionOfPaddle1 + paddleHeight){
 
 
@@ -205,10 +211,6 @@ window.setInterval (function show() {
 
 			if(comboNum % 4 == 0) {
 				changeItUp();
-			}//if
-
-			if(comboNum == 4) {
-				title();
 			}//if
 
 			//plays either beep or boop depending on how many times the ball has bounced
@@ -222,21 +224,20 @@ window.setInterval (function show() {
 
 		} else {
 			lose.play();
-			score2 += comboNum + 1;
-			addToScore("score2", "right", score2);
+			HP1 -= comboNum + 1;
+			loseHP("HP1", "left", HP1);
 			resetCombo("2");
 			startBall();
 
 		}//else
 
-		//pulses combo
-		document.getElementById("combo").className = (document.getElementById("combo").className == "on"?"off":"on");
+		pulse();
 
 	}//if
 
 	//ball on right edge of gameboard
 
-	if (leftPositionOfBall >= gameBoardWidth - paddleWidth - ballHeight) {
+	if (leftPositionOfBall >= gameBoardWidth - paddleWidth - ballHeight - 5) {
 		
 		// if ball hits right paddle, change direction and increase combo
 		if (topPositionOfBall > positionOfPaddle2 && topPositionOfBall < positionOfPaddle2 + paddleHeight){
@@ -247,10 +248,6 @@ window.setInterval (function show() {
 
 			if(comboNum % 4 == 0) {
 				changeItUp();
-			}//if
-
-			if(comboNum == 4) {
-				title();
 			}//if
 
 			//plays either beep or boop depending on how many times the ball has bounced
@@ -264,14 +261,13 @@ window.setInterval (function show() {
 		} else {
 
 			lose.play();
-			score1 += comboNum + 1;
-			addToScore("score1", "left", score1);
+			HP2 -= comboNum + 1;
+			loseHP("HP2", "right", HP2);
 			resetCombo("1");
 			startBall();
 
 		}//else
-		//pulses combo
-		document.getElementById("combo").className = (document.getElementById("combo").className == "on"?"off":"on");
+		pulse();
 
 	}//if
 
@@ -279,9 +275,164 @@ window.setInterval (function show() {
 	document.getElementById("paddle2").style.top = positionOfPaddle2 + "px";
 	document.getElementById("ball").style.top = topPositionOfBall + "px";
 	document.getElementById("ball").style.left = leftPositionOfBall + "px";
-}, 1000/60 )//show
+} //show
 
-//On from here, it's crazy stuff I added
+//starts up game for the first time
+function beginGame() {
+	document.getElementById("begin").className = "hidden";
+	document.getElementById("restart").className = "controls";
+	document.getElementById("pause").className = "controls";
+	restartGame();
+}//begin
+
+//if game is paused, resume, and vice versa
+function togglePauseGame() {
+	if (!controlPlay){
+		resumeGame();
+		document.getElementById("pause").innerHTML = "Pause"
+	} else {
+		pauseGame();
+		document.getElementById("pause").innerHTML = "Resume"
+	}//if
+}//togglePause
+
+// resumes gameplay
+function resumeGame() {
+	controlPlay = window.setInterval(show, 1000/60);
+	
+	//unpauses shake effect if it was paused
+	if (document.getElementById("body").className == "paused") {
+		document.getElementById("body").className = "shake";
+	}//if
+
+
+}// resumeGame
+
+//pauses gameplay
+function pauseGame() {
+	window.clearInterval(controlPlay);
+	if (document.getElementById("body").className == "shake") {
+		document.getElementById("body").className = "paused";//pauses shake effect but does not stop it
+	}//if
+	controlPlay = false;
+}//pausegame
+
+//starts gameplay and resets some variables
+function restartGame() {
+	
+	//resets HP and combo
+	HP1 = MaxHP;
+	HP2 = MaxHP;
+	document.getElementById("HP1").innerHTML = MaxHP;
+	document.getElementById("HP2").innerHTML = MaxHP;
+	document.getElementById("right").className = "still";
+	document.getElementById("left").className = "still";
+	comboNum = 0;
+	document.getElementById("combo").style.color = "transparent"
+	document.getElementById("combo").className = "still"
+
+	//resets weird little extra effects
+	reverse = 1;
+	speed = 1;
+
+	//resets paddles
+	paddleHeight = 150;
+	document.getElementById("paddle1").style.height = paddleHeight + "px"
+	document.getElementById("paddle2").style.height = paddleHeight + "px"
+	positionOfPaddle1 = startPositionOfPaddle1;
+	positionOfPaddle2 = startPositionOfPaddle2;
+
+	//resets ball
+	ballHeight = 20;
+	document.getElementById("ball").style.height = "20px";
+	document.getElementById("ball").style.width = "20px";
+	document.getElementById("ball").className = "normal";
+	document.getElementById("body").className = "still";
+
+
+
+	document.getElementById("combo").innerHTML = "Start!";
+	document.getElementById("gameBoard").style.backgroundColor = "black";
+	startBall();	
+	startMusic();
+	pulse();
+	
+	if (!controlPlay){
+		resumeGame();
+		document.getElementById("pause").innerHTML = "Pause"
+	}//if
+}//restartGame
+
+
+//stops gameplay
+function endGame(){
+	pauseGame();
+
+	changeVis("blocker");
+
+	//show lightbox with HP
+	let message1 = "TIE!"
+	let message2 = "Close to continue"
+
+	if (HP2 > HP1){
+	
+		message1 = "PLAYER 2 WINS WITH " + HP2 + " HP LEFT!";
+		message2 = "CLICK TO START NEW GAME";
+
+	} else if (HP2 < HP1){
+
+		message1 = "PLAYER 1 WINS WITH " + HP1 + " HP LEFT!";
+		message2 = "CLICK TO START NEW GAME";
+	}//if
+
+	showLightBox(message1, message2);
+
+}//endGame
+
+
+/**** LightBox Code ****/
+
+// changes the visibility of divID
+function changeVis(divID) {
+	var element = document.getElementById(divID);
+
+	//if element exists, toggle its class
+	//between hidden and unhidden
+	if (element) {
+		element.className = (element.className == 'hidden')? 'unhidden' : 'hidden';
+	}//if
+}	//changeVis
+
+//display message in lightbox
+function showLightBox(message, message2) {
+
+	//set messages
+	document.getElementById("message").innerHTML = message;
+	document.getElementById("message2").innerHTML = message2;
+
+	//show lightbox
+	changeVis("lightbox");
+	changeVis("boundaryMessage");
+}
+
+//close light box
+function continueGame() {
+
+	changeVis("lightbox");
+	changeVis("boundaryMessage");
+	changeVis("blocker");
+	restartGame();
+	}//continueGame;
+
+/**** End of LightBox Code ****/
+
+/**** Crazy extra stuff ****/
+
+//pulses combo number
+function pulse() {
+	document.getElementById("combo").className = (document.getElementById("combo").className == "pulseAnimationOne"?"pulseAnimationTwo":"pulseAnimationOne");
+}//pulse
+
 
 //returns a messages for winner
 function message(p) {
@@ -292,7 +443,7 @@ function message(p) {
 		case 1:
 			return "GG!";
 		case 2:
-			return "Player " + p + " wins!";
+			return "Go Player " + p + "!";
 		case 3:
 			return "Oof!";
 		case 4:
@@ -302,7 +453,7 @@ function message(p) {
 		case 6:
 			return "Chicken dinner!";
 		case 7:
-			return "Result!";
+			return "Ouch!";
 		case 8:
 			return "Oh yeah!";
 		case 9:
@@ -315,11 +466,14 @@ function message(p) {
 function addToCombo() {
 	comboNum++;//increases combo
 	document.getElementById("combo").innerHTML = comboNum; //updates html with new combo
+
+	if ((HP1 <= (comboNum + 1) && HP2 <= (comboNum + 1))) {
+		document.getElementById("combo").innerHTML = "Sudden death!";
+	}//if
 }//addToCombo
 
 //resets combo and displays message
 function resetCombo(p) {
-
 	comboNum = 0;
 	document.getElementById("combo").innerHTML = (message(p));
 }//resetCombo
@@ -331,7 +485,7 @@ function changeItUp() {
 	
 	colourChange();
 
-	let rand = (parseInt(Math.random()*30)); // 0-29
+	let rand = (parseInt(Math.random()* 30)); // 0-29
 
 	switch(rand){
 //gotta change names
@@ -355,9 +509,13 @@ function changeItUp() {
 			speedUp();
 			document.getElementById("combo").innerHTML = "Too fast for you!";
 			break;
+		case 26:
+			speedUp();
+			document.getElementById("combo").innerHTML = "Nnneeoooow!";
+			break;
 		case 27:
 			speedUp();
-			document.getElementById("combo").innerHTML = "Less haste, more speed!!";
+			document.getElementById("combo").innerHTML = "Less haste, more speed!";
 			break;
 		case 28:
 			speedUp();
@@ -503,19 +661,7 @@ function changeItUp() {
 				break;
 			}
 		case 25:
-			if (document.getElementById("fog").className == "hidden") {
-				document.getElementById("fog").className = "unhidden";
-				document.getElementById("body").className = "still";
-				document.getElementById("combo").innerHTML = "I can't see!";
-				break;
-			} else {
-				document.getElementById("fog").className = "hidden";
-				document.getElementById("combo").innerHTML = "The fog clears!";
-				break;
-			}
-		case 26:
 			if (document.getElementById("body").className == "still") {
-				document.getElementById("fog").className == "hidden";
 				document.getElementById("body").className = "shake";
 				document.getElementById("combo").innerHTML = "Sh-sh-shake it up!";
 				break;
@@ -531,40 +677,63 @@ function changeItUp() {
 //flashes screen to a new colour
 function colourChange(){
 
-	//randomizes r, b and g of colour
-	let r = ((parseInt((Math.random()*57)+1)));
-	let g = ((parseInt((Math.random()*57)+1)));
-	let b = ((parseInt((Math.random()*57)+1)));
+	//r, b and g of colour
+	let r = 0;
+	let g = 0;
+	let b = 0;
 
-	//randomly chooses 2 of r, b or g to make 77 and 0 (to insure a dark colour)
-
-	let i = parseInt(Math.random()*3)//0-2
+	//randomly assigns the values of 77, 0 and a number between 1 and 57 to r, b and g to make a dark colour
+	switch(parseInt(Math.random()*3)){
 
 	// this needs neatening
-	if(i == 0) {
+	case 0:
 		r = 0;
 		g = 77;
-	}//if
-
-	if(i == 1){
+		b = ((parseInt((Math.random()*57)+1)));
+		break;
+	case 1:
 		r = 0;
-		b = 77;	
-	}//if
-
-	if(i == 1){
+		b = 77;
+		g = ((parseInt((Math.random()*57)+1)));
+		break;
+	case 2:
 		g = 0;
-		b = 77;	
-	}//if
+		r = 77;
+		b = ((parseInt((Math.random()*57)+1)));
+		break;
+	case 3:
+		g = 0;
+		b = 77;
+		r = ((parseInt((Math.random()*57)+1)));
+		break;
+	case 4:
+		b = 0;
+		r = 77;
+		g = ((parseInt((Math.random()*57)+1)));
+		break;
+	case 5:
+		b = 0;
+		g = 77;
+		r = ((parseInt((Math.random()*57)+1)));
+		break;
+	}//switch
 
-	document.getElementById("gameBoard").className = (document.getElementById("gameBoard").className == "yes"?"no":"yes");
-	
 	document.getElementById("gameBoard").style.backgroundColor = "rgb(" + r + ", " + g + ", " + b + ")";
+
+	document.getElementById("gameBoard").className = (document.getElementById("gameBoard").className == "colourAnimationTwo"?"colourAnimationOne":"colourAnimationTwo");
+	
 
 }//colourChange
 
 //increases horizontal ball speed
 function speedUp() {
-	leftSpeedOfBall *= 1.5;
+	console.log(leftSpeedOfBall);
+	if (Math.abs(leftSpeedOfBall) < 20){
+		leftSpeedOfBall *= 1.5;
+	} else if (Math.abs(leftSpeedOfBall) < 25){
+		leftSpeedOfBall *= 1.1
+	} else {
+	}//if
 }//speedUp
 
 //increases size of ball
@@ -629,23 +798,24 @@ function revertPaddles() {
 	document.getElementById("paddle2").style.height = paddleHeight + "px"
 }//revertPaddles
 
-//adds combo + 1 to player's score and does a neat little shake effect
-function addToScore(player, position, points) {
-
+//adds combo + 1 to player's HP and does a neat little shake effect
+function loseHP(player, position, points) {
+		if (points <= 0){
+			points = 0;
+			endGame();
+		}//if
 		document.getElementById(player).innerHTML = points;
 		document.getElementById(position).className = "shake";
-		setTimeout(function(){
-			document.getElementById(position).className = "still";
-		}, 50 * (comboNum + 1)
-		);
 
-}//addToScore
+		//The shake effect doesn't go away if a player's points are low enough
+		if (points > 15){
+			setTimeout(function(){
+				document.getElementById(position).className = "still";
+			}, 100
+			);
+		}//if 
 
-//changes title to TRUE TITLE
-function title() {
-	document.getElementById("title").innerHTML = "BONKERS PONG";
-}//title
-
+}//loseHP
 
 //plays background music if it's not already playing
 function startMusic() {
@@ -653,3 +823,5 @@ function startMusic() {
 		music.play();
 	}//if
 }//music
+
+/**** End of crazy extra stuff ****/
