@@ -1,3 +1,7 @@
+body{
+	font-family: 'Press Start 2P', "Lucida Console", Monaco, monospace;
+}
+
 #gameBoard {
 	width: 99%;
 	height: 85vh;
@@ -10,16 +14,17 @@
 	height: 10vh;
 	background-color: white;
 	position: relative;
-	font-family: 'Press Start 2P';
 }
 
 #title{
 	text-align: center;
+	font-size: 3vw;
 }
 
 #header h2{
 	position: absolute;
 	bottom: 0px;
+	font-size: 2vh;
 }
 
 #header #left {
@@ -30,16 +35,46 @@
 	right: 30px;
 }
 
+/* Control Panel */
+
+#controlpanel {
+	position: absolute; 
+	top: 1vh;
+	right: 10px;
+	z-index: 1;
+}
+
+.controls {
+	display: inline-block;
+	color: black;
+	font-size: 1vw;
+	line-height: 20px;
+
+}
+
+/* End Control Panel */
+
 #combo {
 	position: relative;
 	line-height: 85vh;
 	width: 100%;
 	text-align: center;
 	margin: 0px;	
-	font-family: 'Press Start 2P';
 	font-size: 4vw;
 	color: transparent;
 	background-color: transparent;
+}
+
+#begin {
+	position: fixed;
+	width: 99%;
+	height: 85vh;
+	line-height: 85vh;
+	text-align: center;
+	font-size: 4vw;
+	color: white;
+	background-color: black;
+	z-index: 1;
 }
 
 #paddle1 {
@@ -71,43 +106,77 @@
 	border-radius: 0px;
 }
 
-/* From here on it's just Special effects */
-
-#fog {
-	position: fixed;
-	top: 0px;
-	width: 100%;
-	height: 100%;
-	transition: background-color 3s;
-}
+/* Light Box CSS */
 
 .hidden {
-	background-color: transparent;
+	display: none;
 }
 
 .unhidden {
-	background-color: rgba(255, 255, 255, 0.8);
+	display: block;
 }
+
+#lightbox	{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.75);
+	z-index: 2;
+}
+
+
+#positionMessage {
+	position: absolute;
+	width: 100%;
+	height: 85vh;
+
+}
+
+#boundaryMessage {
+	position: relative;
+	padding-top: 10vh;
+	margin-left: 25.5vw;
+	margin-top: 20vh;
+	width: 50vw;
+	height: 40vh;
+	text-align: center;
+	color: white;
+	z-index:3;
+}
+
+#x	{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: white;
+	font-size: 3vh;
+	z-index: 2;
+}
+/* End Lightbox CSS */
+
+/* Special effects */
 
 .maybe{
 }
 
-.yes {
+.colourAnimationOne {
 	animation-name: colorOne;
 	animation-duration: 2s
 }
 
-.no {
+.colourAnimationTwo {
 	animation-name: colorTwo;
 	animation-duration: 2s
 }
 
-.on {
+.pulseAnimationOne {
 	animation-name: pulseOne;
 	animation-duration: 2s
 }
 
-.off {
+.pulseAnimationTwo {
 	animation-name: pulseTwo;
 	animation-duration: 2s
 }
@@ -134,24 +203,27 @@
 }
 
 .shake {
-	animation: shake 2s;
+	animation: shake 3s;
 	animation-iteration-count: infinite;
 }
 
 @keyframes ghost {
-	from {}
+	from {background-color: white;}
 	to{background-color: transparent;}
 }
 
 @keyframes pulseOne {
   from {color: white;}
-  to {}
+  to {color: transparent;}
 }
 
 @keyframes pulseTwo {
   from {color: white;}
-  to {}
+  to {color: transparent;}
 }
+
+/* I left 'to {} empty' because it seemed the only way to make the animation work snoothly.
+Otherwise the screen just turned white for 2 seconds without fading*/
 
 @keyframes colorOne {
   from {background-color: white;}
@@ -175,16 +247,19 @@
 }
 
 /*https://www.w3schools.com/howto/howto_css_shake_image.asp*/
+/*changed slightly from original code*/
 @keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(0px, -2px) rotate(-1deg); }
-  20% { transform: translate(0px, 0px) rotate(1deg); }
-  30% { transform: translate(0px, 2px) rotate(0deg); }
-  40% { transform: translate(0px, -1px) rotate(1deg); }
-  50% { transform: translate(0px, 2px) rotate(-1deg); }
-  60% { transform: translate(0px, 1px) rotate(0deg); }
-  70% { transform: translate(0px, 1px) rotate(-1deg); }
-  80% { transform: translate(0px, -1px) rotate(1deg); }
-  90% { transform: translate(0px, 2px) rotate(0deg); }
-  100% { transform: translate(0px, -2px) rotate(-1deg); }
+   0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, 1px) rotate(0deg); }
 }
+
+/* End Special Effects */
