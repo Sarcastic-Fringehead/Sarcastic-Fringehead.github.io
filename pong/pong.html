@@ -2,7 +2,7 @@
   <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Pong</title>
+    <title>Bonkers Pong</title>
     
     <!-- include an external style sheet -->
     <link rel="stylesheet" href="pong.css">  
@@ -19,33 +19,50 @@
   </head>
   
   <body id="body" class="still">
+
     <div id="header">
 
-      <h1 id="title">PONG</h1>
-      <h2 id="left" class="still" >P1: <span id="score1">0</span></h2>
-      <h2 id="right" class="still">P2: <span id="score2">0</span></h2>
+      <h1 id="title">BONKERS PONG</h1>
+      <h2 id="left" class="still" >HP: <span id="HP1">50</span></h2>
+      <h2 id="right" class="still">HP: <span id="HP2">50</span></h2>
     </div>
+    
+    <div id="controlpanel">
+  		<div onclick="restartGame()" id="restart" class="hidden">Restart</div>
+  		<!--<div onclick="stopGame()" id="stop" class="controls">Stop</div>-->
+  		<div onclick="togglePauseGame()" id="pause" class="hidden">Pause</div>
+  	</div>
+
+  	<div onclick="beginGame()" id="begin" class="unhidden">Click to Start!</div>
 
     <div id="gameBoard" class="maybe">
 	  
-	  <p id="combo" class="on">Start!</p>
-     
+	  <p id="combo" class="on"></p>
+
       <div id="ball" class="normal">
       </div>
 
       <div id="paddle1" class="paddle">
       </div>
 
-      
-
       <div id="paddle2" class="paddle">
       </div>
 
-    <div id="fog" class="hidden"></div>
-
     </div>
 
-    <div id="background"></div>
+    <!-- LightBox Code-->
+
+    <div id="blocker" class="hidden"></div>
+
+    <div id="lightbox" class="hidden"></div>
+
+		<div id="positionMessage">
+			<div id="boundaryMessage" class="hidden">
+				<h2 class="titletext" id="message" onclick="continueGame()">&nbsp;</h2>
+				<p class="titletext" id="message2" onclick="continueGame()"></p>
+			</div>
+
+		</div> 
 
     <!-- include an external JavaScript file -->
     <script src="pong.js"></script>
