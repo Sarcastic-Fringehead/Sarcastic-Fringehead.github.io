@@ -1,0 +1,202 @@
+body {
+	background-color:black;
+}
+
+#gameBoard{
+	border: 1px solid black;
+	display: grid;
+	grid-template-columns: 128px 128px 128px 128px 128px;
+	grid-template-rows: 128px 128px 128px 128px 128px;
+	justify-content: center;
+	width: 640px;
+	height: 640px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#gameBoard div{
+	background-color: #67AD5B;
+	image-rendering: pixelated;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.jockey {
+	background-image:url("images/JockeyWait.gif");
+}
+
+.treeOne {
+	background-image:url("images/Tree1.png");
+}
+
+.treeTwo {
+	background-image:url("images/Tree2.png");
+}
+
+.rock {
+	background-image:url("images/Rocks1.png");
+}
+
+.goal {
+	background-image:url("images/Goal.png");
+}
+
+.fenceHoriz {
+	background-image:url("images/FenceHorizontal.png");
+}
+
+.fenceVert {
+	background-image:url("images/FenceVertical.png");
+}
+
+.riverHoriz {
+	background-image:url("images/RiverHorizontal.png");
+}
+
+.riverVert{
+	background-image:url("images/RiverVertical.png");
+}
+
+.riverBendLD {
+	background-image:url("images/RiverBendLD.png");
+}
+
+.riverBendLU{
+	background-image:url("images/RiverBendLU.png");
+}
+
+.riverBendRD{
+	background-image:url("images/RiverBendRD.png");
+}
+
+.riverBendRU{
+	background-image:url("images/RiverBendRU.png");
+}
+
+.river {
+	background-image:url("images/Puddle.png");
+}
+
+.horseUp {
+	background-image:url("images/HorseUp.png");
+}
+
+.horseLeft {
+	background-image:url("images/HorseLeft.png");
+}
+
+.horseDown {
+	background-image:url("images/HorseDown.png");
+}
+
+.horseRight {
+	background-image:url("images/HorseRight.png");
+}
+
+.jockeyUp {
+	background-image:url("images/JockeyUp.png");
+}
+
+.jockeyLeft {
+	background-image:url("images/JockeyLeft.png");
+}
+
+.jockeyDown {
+	background-image:url("images/JockeyDown.png");
+}
+
+.jockeyRight {
+	background-image:url("images/JockeyRight.png");
+}
+
+.jumpUp {
+	background-image:url("images/FenJumpUp.png");
+}
+
+.jumpLeft {
+	background-image:url("images/FenJumpLeft.png");
+}
+
+.jumpDown {
+	background-image:url("images/FenJumpDown.png");
+}
+
+.jumpRight {
+	background-image:url("images/FenJumpRight.png");
+}
+
+.enemyUp {
+	background-image:url("images/EnemyUp.png");
+}
+
+.enemyLeft {
+	background-image:url("images/EnemyLeft.png");
+}
+
+.enemyDown {
+	background-image:url("images/EnemyDown.png");
+}
+
+.enemyRight {
+	background-image:url("images/EnemyRight.png");
+}
+
+.sentryUp {
+	background-image:url("images/SentryUp.png");
+}
+
+.sentryLeft {
+	background-image:url("images/SentryLeft.png");
+}
+
+.sentryDown {
+	background-image:url("images/SentryDown.png");
+}
+
+.sentryRight {
+	background-image:url("images/SentryRight.png");
+}
+
+.bridgeHoriz {
+	background-image:url("images/BridgeHorizontal.png");
+}
+
+.bridgeVert {
+	background-image:url("images/BridgeVertical.png");
+}
+
+.bridge {
+	background-color: #800020 !important;
+}
+
+.bridgeHUp {
+	background-image:url("images/BHUp.png");
+}
+
+.bridgeHLeft {
+	background-image:url("images/BHLeft.png");
+}
+
+.bridgeHDown {
+	background-image:url("images/BHDown.png");
+}
+
+.bridgeHRight {
+	background-image:url("images/BHRight.png");
+}
+
+.bridgeJUp {
+	background-image:url("images/BJUp.png");
+}
+
+.bridgeJLeft {
+	background-image:url("images/BJLeft.png");
+}
+
+.bridgeJDown {
+	background-image:url("images/BJDown.png");
+}
+
+.bridgeJRight {
+	background-image:url("images/BJRight.png");
+}
