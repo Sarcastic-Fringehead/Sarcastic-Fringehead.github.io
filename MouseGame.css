@@ -1,0 +1,389 @@
+/* Sprites made using https://www.pixilart.com/*/
+
+body {
+	font-family: 'Press Start 2P', "Lucida Console", Monaco, monospace;
+	background-color: black;
+}
+
+#introBox {
+	position: absolute;
+	background-image:url("images/intro.png");
+	background-color: black;
+	image-rendering: pixelated;
+	background-repeat: no-repeat;
+	background-size: 640px;
+	height: 1000px;
+	width: 1000px;
+	left: 200px;
+}
+
+#title {
+	position: absolute;
+	color: white;
+	text-align: center;
+	padding-top: 50px; 
+	font-size: 50px;
+}
+
+#text {
+	position: absolute;
+	color: white;
+	text-align: left;
+	padding-top: 200px; 
+	font-size: 19px;
+}
+
+#button {
+	position: absolute;
+	color: white;
+	text-align: left;
+	padding-top: 200px; 
+	font-size: 23px;
+	top: 400px;
+}
+
+
+#gameOverBox {
+	position: fixed;
+	height: 1000px;
+	width: 1000px;
+	padding-top: 200px;
+	text-align: center;
+	font-size: 40px;
+}
+
+#winBox {
+	position: fixed;
+	height: 100vh;
+	width: 100vh;
+	font-size: 40px;
+	text-align: center;
+}
+
+
+.win {
+	background-image: url("images/win.png");
+	color: white;
+	image-rendering: pixelated;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.gameOver{
+	background-color: black;
+	color: white;
+	transition-duration: 5s;
+}
+
+.hidden {
+	color: transparent;
+	background-color: transparent; 
+}
+
+#gameBox div{
+	font-size: 20px;
+}
+
+
+@keyframes defeat{
+	0%  {background-image:url("images/animations/defeat0.png");}
+	10% {background-image:url("images/animations/defeat0.png");}
+	20% {background-image:url("images/animations/defeat1.png");}
+	30% {background-image:url("images/animations/defeat2.png");}
+	40% {background-image:url("images/animations/defeat3.png");}
+	50% {background-image:url("images/animations/defeat4.png");}
+	60% {background-image:url("images/animations/defeat5.png");}
+	70% {background-image:url("images/animations/defeat6.png");}
+	80% {background-image:url("images/animations/defeat7.png");}
+	90% {background-image:url("images/animations/defeat8.png");}
+	100% {background-image:url("images/animations/defeat9.png");}
+}
+
+#hud {
+	color: white;
+}
+
+#gameBoard div {
+	image-rendering: pixelated;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#tiles {
+	background-image: url("images/floor.png");
+	image-rendering: pixelated;
+	background-size: cover;
+	position: absolute;
+	display: grid;
+	grid-template-columns: 128px 128px 128px 128px 128px;
+	grid-template-rows: 128px 128px 128px 128px 128px;
+	width: 640px;
+	height: 640px;
+	padding: 0px;
+	top: 250px;
+	left: 250px;
+}
+
+#tiles div {
+	height: 128px;
+	width: 128px;
+	image-rendering: pixelated;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.pit {
+	background-color: black;
+}
+
+#hero {
+	position: absolute;
+	top: 506px;
+	left: 506px;
+	width: 128px;
+	height: 128px;
+	border: none;
+	image-rendering: pixelated;
+	background-repeat: no-repeat;
+	background-size: cover;
+	transition-timing-function: linear;
+	transition: top 0.25s, left 0.25s;
+}
+
+.heroDown {
+	animation: none;
+	background-image:url("images/heroDown.png");
+}
+
+.heroUp {
+	animation: none;
+	background-image:url("images/heroUp.png");
+}
+
+.heroRight {
+	animation: none;
+	background-image:url("images/heroRight.png");
+}
+
+.heroLeft {
+	animation: none;
+	background-image:url("images/heroLeft.png");
+}
+
+.dead {
+	animation: none;
+	background-image: url("images/death.png");
+}
+
+
+@keyframes heroDown {
+	25% {background-image:url("images/animations/heroDown1.png");}
+	50% {background-image:url("images/animations/heroDown2.png");}
+	75% {background-image:url("images/animations/heroDown1.png");}
+	100% {background-image:url("images/animations/heroDown0.png");}
+}
+
+@keyframes heroUp {
+	25% {background-image:url("images/animations/heroUp0.png");}
+	50% {background-image:url("images/animations/heroUp1.png");}
+	75% {background-image:url("images/animations/heroUp2.png");}
+	100% {background-image:url("images/animations/heroUp3.png");}
+}
+
+@keyframes heroRight {
+	25% {background-image:url("images/animations/heroRight0.png");}
+	50% {background-image:url("images/animations/heroRight1.png");}
+	75% {background-image:url("images/animations/heroRight2.png");}
+	100% {background-image:url("images/animations/heroRight3.png");}
+}
+
+@keyframes heroLeft {
+	25% {background-image:url("images/animations/heroLeft0.png");}
+	50% {background-image:url("images/animations/heroLeft1.png");}
+	75% {background-image:url("images/animations/heroLeft2.png");}
+	100% {background-image:url("images/animations/heroLeft3.png");}
+}
+
+@keyframes ouchDown {
+	25% {background-image:url("images/animations/ouchDown1.png");}
+	50% {background-image:url("images/animations/ouchDown2.png");}
+	75% {background-image:url("images/animations/ouchDown1.png");}
+	100% {background-image:url("images/animations/ouchDown0.png");}
+}
+
+@keyframes ouchUp {
+	25% {background-image:url("images/animations/ouchUp0.png");}
+	50% {background-image:url("images/animations/ouchUp1.png");}
+	75% {background-image:url("images/animations/ouchUp2.png");}
+	100% {background-image:url("images/animations/ouchUp3.png");}
+}
+
+@keyframes ouchRight {
+	25% {background-image:url("images/animations/ouchRight0.png");}
+	50% {background-image:url("images/animations/ouchRight1.png");}
+	75% {background-image:url("images/animations/ouchRight2.png");}
+	100% {background-image:url("images/animations/ouchRight3.png");}
+}
+
+@keyframes ouchLeft {
+	25% {background-image:url("images/animations/ouchLeft0.png");}
+	50% {background-image:url("images/animations/ouchLeft1.png");}
+	75% {background-image:url("images/animations/ouchLeft2.png");}
+	100% {background-image:url("images/animations/ouchLeft3.png");}
+}
+
+@keyframes fall {
+	6.25% {background-image:url("images/animations/fall0.png");}
+	12.5% {background-image:url("images/animations/fall1.png");}
+	18.75% {background-image:url("images/animations/fall0.png");}
+	25% {background-image:url("images/animations/fall1.png");}
+	31.25% {background-image:url("images/animations/fall0.png");}
+	37.5% {background-image:url("images/animations/fall1.png");}
+	43.75% {background-image:url("images/animations/fall0.png");}
+	50% {background-image:url("images/animations/fall1.png");}
+	56.25% {background-image:url("images/animations/fall1.png");}
+	62.5% {background-image:url("images/animations/fall1.png");}
+	68.75% {background-image:url("images/animations/fall3.png");}
+	75% {background-image:url("images/animations/fall4.png");}
+	81.25% {background-image:url("images/animations/fall5.png");}
+	87.5% {background-image:url("images/animations/fall6.png");}
+	93.75% {background-image:url("images/animations/fall7.png");}
+	100% {background-image:url("images/animations/fall8.png");}
+}
+
+@keyframes death {
+	20% {background-image:url("images/animations/death0.png");}
+	40%	{background-image:url("images/animations/death1.png");}
+	60% {background-image:url("images/animations/death2.png");}
+	80% {background-image:url("images/animations/death3.png");}
+	100% {background-image:url("images/animations/death4.png");}
+}
+
+.ladder{
+	background-image:url("images/ladder.png");
+}
+
+.wall {
+	background-image: url("images/wall.png");
+}
+
+#e1 {
+	position: absolute;
+	display: none;
+	height: 128px;
+	width: 128px;
+	top: 250px;
+	left: 250px;
+	image-rendering: pixelated;
+	background-repeat: no-repeat;
+	background-size: cover;
+	transition-timing-function: linear;
+	transition: top 0.25s, left 0.25s;
+	transition-delay: 0.1s;
+}
+
+#e2 {
+	position: absolute;
+	display: none;
+	height: 128px;
+	width: 128px;
+	top: 250px;
+	left: 250px;
+	image-rendering: pixelated;
+	background-repeat: no-repeat;
+	background-size: cover;
+	transition-timing-function: linear;
+	transition: top 0.25s, left 0.25s;
+	transition-delay: 0.1s;
+}
+
+#e3 {
+	position: absolute;
+	display: none;
+	height: 128px;
+	width: 128px;
+	top: 250px;
+	left: 250px;
+	image-rendering: pixelated;
+	background-repeat: no-repeat;
+	background-size: cover;
+	transition-timing-function: linear;
+	transition: top 0.25s, left 0.25s;
+	transition-delay: 0.1s;
+}
+
+#e4 {
+	position: absolute;
+	display: none;
+	height: 128px;
+	width: 128px;
+	top: 250px;
+	left: 250px;
+	image-rendering: pixelated;
+	background-repeat: no-repeat;
+	background-size: cover;
+	transition-timing-function: linear;
+	transition: top 0.25s, left 0.25s;
+	transition-delay: 0.1s;
+}
+
+
+.gooberDown {
+	background-image:url("images/gooberDown.png");
+}
+
+.gooberRight {
+	background-image:url("images/gooberRight.png");
+}
+
+.gooberLeft {
+	background-image:url("images/gooberLeft.png");
+}
+
+.gooberUp {
+	background-image:url("images/gooberUp.png");
+}
+
+@keyframes gooberDown {
+	25% {background-image:url("images/animations/gooberDown0.png");}
+	50% {background-image:url("images/animations/gooberDown1.png");}
+	75% {background-image:url("images/animations/gooberDown2.png");}
+	100% {background-image:url("images/animations/gooberDown3.png");}
+}
+
+@keyframes gooberRight {
+	25% {background-image:url("images/animations/gooberRight0.png");}
+	50% {background-image:url("images/animations/gooberRight1.png");}
+	75% {background-image:url("images/animations/gooberRight2.png");}
+	100% {background-image:url("images/animations/gooberRight3.png");}
+}
+
+@keyframes gooberLeft {
+	25% {background-image:url("images/animations/gooberLeft0.png");}
+	50% {background-image:url("images/animations/gooberLeft1.png");}
+	75% {background-image:url("images/animations/gooberLeft2.png");}
+	100% {background-image:url("images/animations/gooberLeft3.png");}
+}
+
+@keyframes gooberUp {
+	25% {background-image:url("images/animations/gooberUp0.png");}
+	50% {background-image:url("images/animations/gooberUp1.png");}
+	75% {background-image:url("images/animations/gooberUp2.png");}
+	100% {background-image:url("images/animations/gooberUp3.png");}
+}
+
+.placeholderUp {
+	background-image:url("images/placeholderUp.png");
+}
+
+#entities .placeholderRight {
+	background-image:url("images/placeholderRight.png");
+}
+
+#entities .placeholderLeft {
+	background-image:url("images/placeholderLeft.png");
+}
+
+#entities .placeholderDown {
+	background-image:url("images/placeholderDown.png");
+}

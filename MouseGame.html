@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Mouse</title>
+    
+    <!-- include an external style sheet -->
+    <link rel="stylesheet" href="MouseGame.css">  
+    
+    <!--https://fonts.google.com/-->
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  </head>
+  
+  <body>
+  	<div id="hud">HP: 3</div>>
+    <div id="gameboard">
+
+      <div id="tiles">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+     <div id="hero" class="heroDown"> 
+  	 </div>
+
+  	 <div id="e1" class=""> 
+  	 </div>
+
+  	 <div id="e2" class=""> 
+  	 </div>
+
+  	 <div id="e3" class=""> 
+  	 </div>
+
+  	 <div id="e4" class=""> 
+  	 </div>
+
+    </div>
+
+    <div id="levelUpBox">
+      <div>Next Level!</div>
+    </div>
+
+    <div id="gameOverBox">
+      <div>Game over!</div>
+      <br><br>
+      <div onclick="beginGame()">Try again?</div>
+    </div>
+
+    <div id="winBox">
+    <div id="winTitle"><br><br>You made it!</div>
+    <div id="winText" onclick="beginGame()"><br>Play again?</div>
+    </div>
+
+    <div id="introBox">
+      <div id="title">Mouse hole</div>
+      <div id="text">Mouse has fallen into a <br><br> miniature dungeon! Use <br><br> the arrow keys in this <br><br> turn-based grid game to <br><br> navigate each floor, <br><br> avoid enemies like <br><br> goobers, and reach the <br><br> ladders to escape! <br><br>But if your HP reaches<br><br> 0, you must start again!</div>
+      <div id="button" onclick="beginGame()">Click to begin!</div>
+    </div>
+
+    <script src="MouseGame.js"></script>
+  </body>
+  
+</html>
